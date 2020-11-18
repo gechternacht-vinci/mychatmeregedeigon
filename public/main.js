@@ -1,24 +1,27 @@
-function messageBox(message){
+function messageCreate(message){
 
     const box= document.createElement("div");
     box.innerHTML = message;
-    document.getElementById("chat-box").appendChild(box);
+    document.querySelector("#chat-box").appendChild(box);
+    box.scrollIntoView();
 }
 
 
 const socket = io.connect("https://mychatmeregedeigon.herokuapp.com/")
 socket.on("welcome",data => document.querySelector('header').innerHTML = data)
-socket.on("bodyClick",data => {
+socket.on("messageSend",data => {
     console.log(`received: ${data}`)
-    messageBox(`received: ${data}`)
+    messageCreate(`received: ${data}`)
 });
 
-document.querySelector('body').addEventListener("click",()=>{
-    let messageContent = document.querySelector('input').value;
-    socket.emit("bodyClick",messageContent);
-
-    messageBox(`sending message:${messageContent}`)
-    console.log(`sending message:${messageContent}`);
-})
+function sendMessage(){
+    let messageContent = document.querySelector('input');
+    if (messageContent.value !== ""){ 
+        socket.emit("messageSend",messageContent.value);
+        messageCreate(`sending message:${messageContent.value}`)
+        messageContent.value = "";
+    }
+}
+document.querySelector('#send-btn').addEventListener("click",sendMessage)
 
 

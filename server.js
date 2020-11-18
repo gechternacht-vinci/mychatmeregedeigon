@@ -14,9 +14,9 @@ io.sockets.on('connection',socket=>{
     console.log(socket.id) 
     socket.emit("welcome",`hello and wellcome, ${socket.id}`)
     
-    socket.on("bodyClick",data=>{
+    socket.on("messageSend",data=>{
         console.log(`serverside data: ${data}`); 
-        socket.broadcast.emit("bodyClick",data)
+        socket.broadcast.emit("messageSend",data)
     })
 
 })
