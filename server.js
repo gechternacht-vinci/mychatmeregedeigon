@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = 3000;
+const PORT = process.env.PORT;
 const server = app.listen(PORT,()=> console.log(`running on ${PORT}`))
 const cors = require('cors')
 
