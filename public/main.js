@@ -1,4 +1,4 @@
-const socket = io.connect("http://localhost:3000")
+const socket = io.connect("https://mychatmeregedeigon.herokuapp.com/")
 socket.on("welcome",data => document.querySelector('header').innerHTML = data)
 socket.on("bodyClick",data => console.log(`received: ${data}`));
 
